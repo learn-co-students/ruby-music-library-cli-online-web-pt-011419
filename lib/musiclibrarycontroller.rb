@@ -24,5 +24,8 @@ class MusicLibraryController
     break       
   end
  end
-end  
+end
+  def list_songs
+    
+  end
 end
