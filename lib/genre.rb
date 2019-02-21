@@ -1,10 +1,13 @@
+require 'pry'
 class Genre 
+  extend Concerns::Findable
   attr_accessor :name 
- 
+  attr_reader :songs
  @@all = [] 
  
  def initialize(name)
    @name = name
+   @songs = []
  end
  
  def self.all
@@ -20,7 +23,12 @@ class Genre
      new_genre = Genre.new(name)
      new_genre.save
      new_genre
- 
- end
+  end
+  def songs 
+    @songs
+  end
+  def artists
+   @songs.collect { |genre| genre.artist }.uniq
+  end
  
 end
