@@ -35,7 +35,7 @@ class Song
     end
    end
    def self.find_by_name(song_name)
-     @@all.find {|song| song.name == song_name}
+     all.find {|song| song.name == song_name}
    end
    def self.find_or_create_by_name(song_name)
      song = self.find_by_name(song_name)
@@ -46,14 +46,14 @@ class Song
        end
      end
    def self.new_from_filename(file_name)
-     file_bits = file_name.gsub(/(\.mp3)/,'')
-    file_bits = file_bits.split(" - ")
+     #file_bits = file_name.gsub(/(\.mp3)/,'')
+    file_bits = file_name.split(" - ")
     artist = Artist.find_or_create_by_name(file_bits[0])
-    genre = Genre.find_or_create_by_name(file_bits[2])
-    song = Song.find_or_create_by_name(file_bits[1])
-    song.genre = genre
-    song.artist = artist
-    song
+    genre = Genre.find_or_create_by_name(file_bits[2].gsub(".mp3", ""))
+    song = Song.new(file_bits[1],artist,genre)
+    #song.genre = genre
+    ##song.artist = artist
+    #song
   end
     def self.create_from_filename(file_name)
      file = Song.new_from_filename(file_name)

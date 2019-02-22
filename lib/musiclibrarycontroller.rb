@@ -1,8 +1,9 @@
+require 'pry'
 class MusicLibraryController
   attr_accessor :path 
   def initialize(path = "./db/mp3s")
     
-     MusicImporter.new(path).import
+    @path = MusicImporter.new(path).import
      
   end
   def call
@@ -26,6 +27,17 @@ class MusicLibraryController
  end
 end
   def list_songs
-    
+   #binding.pry
+   #list = Song.all
+   list = Song.all.sort_by! do |songA| 
+    # binding.pry
+     songA.name
+   end
+  # binding.pry
+   list.each.with_index(1) do |song, i|
+     #binding.pry
+     puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+   end
+   # sorts and numbers song list alphabetical
   end
 end
