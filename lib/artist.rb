@@ -23,4 +23,11 @@ class Artist
   def self.create(artist)
     Artist.new(artist)
   end
+
+  def add_song(song)
+    if song.artist == nil
+      @songs << song
+      song.artist = self
+    end
+  end
 end
