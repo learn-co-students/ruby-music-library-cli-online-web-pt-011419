@@ -23,4 +23,7 @@ class Song
   def self.create(song)
     Song.new(song)
   end
+
+  def artist=(artist)
+  end
 end
