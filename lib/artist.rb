@@ -12,6 +12,10 @@ class Artist
     @@all
   end
 
+  def songs
+    @songs
+  end
+
   def self.destroy_all
     @@all.clear
   end
@@ -25,17 +29,18 @@ class Artist
   end
 
   def add_song(song)
+    self.songs << song unless self.songs.include?(song)
+#need 2 steps - first songs should add to songs if it doesnt already include it. Then it should add artist if it doesn't already have it
     if song.artist == nil
-      @songs << song
       song.artist = self
     end
   end
 
   def genres
-binding.pry
-    @@all.collect do |song|
+
+    self.songs.collect do |song|
       song.genre
-    end
+    end.uniq
   end
 
 end
