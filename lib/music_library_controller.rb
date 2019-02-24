@@ -28,7 +28,7 @@ attr_accessor :path, :MusicImporter
   end
 
   def list_songs
-    lala = Song.all.sort_by! do |song|
+    lala = Song.all.uniq.sort_by! do |song|
       song.name
     end
     lala.each.with_index(1) do |song, i|
