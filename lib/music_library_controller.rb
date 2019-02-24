@@ -16,13 +16,13 @@ attr_accessor :path, :MusicImporter
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
+
     i = 0
     loop do
       input = gets.chomp
       i += 1
       if i == 4 || input == "exit"
         break
-
       end
     end
   end
@@ -63,6 +63,25 @@ attr_accessor :path, :MusicImporter
         puts "#{i}. #{song.name} - #{song.genre.name}"
       end
     end
+  end
+
+  def list_songs_by_genre
+    input = gets.chomp
+    puts "Please enter the name of a genre:"
+    if gen = Genre.find_by_name(input)
+      gen.songs.sort_by(&:name).each.with_index(1) do |song, i|
+        puts "#{i}. #{song.artist.name} - #{song.name}"
+      end
+    end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    input = gets.strip.to_i
+    if (1..Song.all.length).include?(input)
+      song = Song.all.uniq.sort{ |a, b| a.name <=> b.name}[input -1]
+    end
+      puts "Playing #{song.name} by #{song.artist.name}" if song
   end
 
 end
