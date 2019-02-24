@@ -28,15 +28,20 @@ attr_accessor :path, :MusicImporter
   end
 
   def list_songs
-    lala = Song.all.uniq.sort_by! do |song|
+    lala = Song.all.sort_by! do |song|
       song.name
     end
-
     lala.each.with_index(1) do |song, i|
-
       puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-      # binding.pry
     end
+  end
 
+  def list_artists
+    artist_name = Song.all.sort_by! do |song|
+      song.artist.name
+    end
+    artist_name.each.with_index(1) do |song, i|
+      puts "#{i}. #{song.artist.name}"
+    end
   end
 end
