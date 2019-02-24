@@ -37,11 +37,32 @@ attr_accessor :path, :MusicImporter
   end
 
   def list_artists
-    artist_name = Song.all.sort_by! do |song|
-      song.artist.name
+    artist_name = Artist.all.uniq.sort_by! do |art|
+      art.name
     end
-    artist_name.each.with_index(1) do |song, i|
-      puts "#{i}. #{song.artist.name}"
+    artist_name.each.with_index(1) do |art, i|
+      puts "#{i}. #{art.name}"
     end
   end
+
+  def list_genres
+    genre_name = Genre.all.uniq.sort_by! do |gen|
+
+      gen.name
+    end
+    genre_name.each.with_index(1) do |gen, i|
+      puts "#{i}. #{gen.name}"
+    end
+  end
+
+  def list_songs_by_artist
+    input = gets.chomp
+    puts "Please enter the name of an artist:"
+    if art = Artist.find_by_name(input)
+      art.songs.sort_by(&:name).each.with_index(1) do |song, i|
+        puts "#{i}. #{song.name} - #{song.genre.name}"
+      end
+    end
+  end
+
 end
