@@ -11,7 +11,8 @@ attr_accessor :path
   end
 
   def import
-    binding.pry
-    Song.create_from_filename(files)
+    file = files.each {|f| Song.create_from_filename(f)}
+    # binding.pry
+    # Song.create_from_filename(files)
   end
 end
