@@ -18,10 +18,10 @@ class Song
   def self.destroy_all
     @@all.clear
   end
-
-  def save
-    @@all << self
-  end
+  #
+  # def save
+  #   @@all << self
+  # end
 
   def self.create(song)
     Song.new(song)
@@ -46,6 +46,6 @@ class Song
   end
 
   def self.create_from_filename(name)
-    self.new_from_filename(name).save
+    self.new_from_filename(name)#.save
   end
 end
