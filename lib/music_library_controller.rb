@@ -19,12 +19,26 @@ attr_accessor :path, :MusicImporter
 
     i = 0
     loop do
-      input = gets.chomp
+       input = gets.chomp
       i += 1
       if i == 4 || input == "exit"
         break
+      elsif input == 'list songs'
+        list_songs
+      elsif input == "list artists"
+        list_artists
+      elsif input == "list genres"
+        list_genres
+      elsif input == "list artist"
+        list_songs_by_artist
+      elsif input == "list genre"
+        list_songs_by_genre
+      elsif input == "play song"
+        play_song
+
       end
     end
+
   end
 
   def list_songs
@@ -80,11 +94,7 @@ attr_accessor :path, :MusicImporter
     input = gets.strip.to_i
     if (1..Song.all.length).include?(input)
       song = Song.all.uniq.sort{ |a, b| a.name <=> b.name}[input -1]
-      end
       puts "Playing #{song.name} by #{song.artist.name}" if song
-    end
-    artist_name.each.with_index(1) do |art, i|
-      puts "#{i}. #{art.name}"
     end
   end
 
@@ -97,7 +107,4 @@ attr_accessor :path, :MusicImporter
     end
   end
 
-  def list_songs_by_artist
-
-  end
 end
