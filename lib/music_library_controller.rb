@@ -80,8 +80,24 @@ attr_accessor :path, :MusicImporter
     input = gets.strip.to_i
     if (1..Song.all.length).include?(input)
       song = Song.all.uniq.sort{ |a, b| a.name <=> b.name}[input -1]
-    end
+      end
       puts "Playing #{song.name} by #{song.artist.name}" if song
+    end
+    artist_name.each.with_index(1) do |art, i|
+      puts "#{i}. #{art.name}"
+    end
   end
 
+  def list_genres
+    genre_name = Genre.all.uniq.sort_by! do |gen|
+      gen.name
+    end
+    genre_name.each.with_index(1) do |gen, i|
+      puts "#{i}. #{gen.name}"
+    end
+  end
+
+  def list_songs_by_artist
+
+  end
 end
