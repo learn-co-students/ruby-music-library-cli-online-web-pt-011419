@@ -1,8 +1,8 @@
 class MusicLibraryController
   
-  attr_accessor :path 
+ # attr_accessor :path 
   def initialize (path = './db/mp3s')
-    @path = path 
+    #@path = path 
     MusicImporter.new(path).import 
   end 
   
@@ -17,17 +17,21 @@ class MusicLibraryController
     puts "To list all of the songs of a particular genre, enter 'list genre'."
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
+    puts "What would you like me to do?"
+  input = gets.strip
   
-  case input 
-   when "list songs"
-     list_songs
-     when "list artists"
-       list_artists
-       when "list genres"
-         list_genres
-         when "play song"
-           play_song
-           end 
+# # case input 
+#   # when "list songs"
+#   #  list_songs
+#   when "list artists"
+#     list_artists
+#   when "list genres"
+#         list_genres
+#         when "play song"
+#           play_song
+#           end 
    end 
   end 
 end 
+
+
