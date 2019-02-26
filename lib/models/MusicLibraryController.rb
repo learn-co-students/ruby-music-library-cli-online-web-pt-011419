@@ -1,5 +1,6 @@
+require 'pry'
 class MusicLibraryController
-  4
+  
   def initialize (path = './db/mp3s')
     MusicImporter.new(path).import 
   end 
@@ -38,23 +39,52 @@ class MusicLibraryController
 
 def list_songs 
   Song.all.sort_by {|song| song.name}.each_with_index do |song, index|
-  puts "#{index +1 }. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+  puts "#{index +1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
   end 
 end 
 
 def list_artists 
   Artist.all.sort_by {|artist| artist.name}.each_with_index do |artist, index|
-    puts "#{index +1 }. #{artist.name}"
+    puts "#{index +1}. #{artist.name}"
   end
  end 
  
  def list_genres
     Genre.all.sort_by {|genre| genre.name}.each_with_index do |genre, index|
-    puts "#{index +1 }. #{genre.name}"
+    puts "#{index +1}. #{genre.name}"
   end
  end 
  
  def list_songs_by_artist
-   puts "Please enter the name of an artist:"
+  puts "Please enter the name of an artist:"
+  input = gets.chomp
+  
+ if artist = Artist.find_by_name(input)
+    artist.songs.sort_by {|song| song.name}.each_with_index do |song, index|
+    puts "#{index +1}. #{song.name} - #{song.genre.name}"
+  end 
+ end 
+end 
+
+def list_songs_by_genre
+  puts "Please enter the name of a genre:"
+  input = gets.chomp
+  
+ if genre = Genre.find_by_name(input)
+    genre.songs.sort_by {|song| song.name}.each_with_index do |song, index|
+    puts "#{index +1}. #{song.artist.name} - #{song.name}"
+    end 
+  end 
+ end 
+ 
+ def play_song
+   puts "Which song number would you like to play?"
+   input = gets.chomp.to_i
+
+   Song.all.sort_by {|song| song.name}.each_with_index do |song, index|
+     if index +1 == input 
+     puts "Playing #{song.name} by #{song.artist.name}"
+   end 
+  end 
  end 
 end 
