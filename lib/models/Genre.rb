@@ -27,6 +27,7 @@
   artist = songs.collect {|song| song.artist}
   artist.uniq 
  end 
+ 
  def self.create(name)
    genre = self.new(name)
    genre.save

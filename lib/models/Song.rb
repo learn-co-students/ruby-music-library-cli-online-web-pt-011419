@@ -42,11 +42,7 @@ class Song
    @@all.detect {|artist| artist.name == name } 
  end 
  
- def self.create_from_filename(name)
-   song = self.new(name)
- end 
- 
- def self.find_or_create_by_name(name)
+  def self.find_or_create_by_name(name)
    self.find_by_name(name) || self.create(name)
  end 
  
