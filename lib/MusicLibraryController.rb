@@ -18,7 +18,7 @@ class MusicLibraryController
       puts "To play a song, enter 'play song'."
       puts "To quit, type 'exit'."
       puts "What would you like to do?"
-      case input
+      case input # calls methods based on user input
          when "list songs"
            list_songs
          when "list artists"
@@ -32,6 +32,54 @@ class MusicLibraryController
          when "play song"
            play_song
       end
+    end
+  end
+  
+  def list_songs 
+    Song.all.sort{|a,b| a.name <=> b.name}.each_with_index do |song, i|
+      puts "#{i+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
+  
+  def list_artists
+    Artist.all.sort{|a,b| a.name <=> b.name}.each_with_index do |artist, i|
+      puts "#{i+1}. #{artist.name}"
+    end
+  end
+
+  def list_genres
+    Genre.all.sort{|a,b| a.name <=> b.name}.each_with_index do |genre, i|
+      puts "#{i+1}. #{genre.name}"
+    end
+  end
+  
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    input = gets.strip
+    if artist = Artist.find_by_name(input) # if an instance of the artist input by the user is found
+      artist.songs.sort{|a, b| a.name <=> b.name}.each_with_index do |song, i|
+        puts "#{i+1}. #{song.name} - #{song.genre.name}"
+      end
+    end
+  end
+  
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets.strip
+    if genre = Genre.find_by_name(input) # if an instance of the genre input by the user is found
+      genre.songs.sort{|a, b| a.name <=> b.name}.each_with_index do |song, i|
+        puts "#{i+1}. #{song.artist.name} - #{song.name}"
+      end
+    end
+  end
+  
+ def play_song
+    puts "Which song number would you like to play?"
+    input = gets.strip.to_i
+    if input > 0 && input <= Song.all.length # user input is between 1 and the num of songs in the lib
+      playlist = Song.all.sort{|a, b| a.name <=> b.name} 
+      song = playlist[input-1] # sets song to match the correct index in playlist array
+      puts "Playing #{song.name} by #{song.artist.name}"
     end
   end
 end
