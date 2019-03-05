@@ -19,9 +19,14 @@ class Artist
     @@all
   end 
   
-  def add_song(song) 
-    song.artist = self
-    song
+  def add_song(song)
+    if song.artist == "unknown"
+      song.artist = self
+    end
+    
+    if @songs.find {|s| s == song} == nil
+      @songs << song
+    end 
   end
   
 end 
