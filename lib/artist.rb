@@ -13,7 +13,6 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
-    @genres = []
   end 
   
   def self.all
@@ -31,11 +30,8 @@ class Artist
   end
   
   def genres
-    self.songs.each do |s|
-      if self.genres.find {|g| g == s.genre} == nil 
-        @genres << s.genre
-      end
-    end 
+    genres = self.songs.map {|song| song.genre}
+    genres.uniq
   end 
   
 end 

@@ -38,6 +38,19 @@ class Song
     end
   end 
   
+  def self.find_by_name(name)
+    self.all.find {|s| s.name == name}
+  end 
+  
+  def self.create_by_name(name)
+    self.new(name)
+    
+  end 
+  
+  def self.find_or_create_by_name 
+    self.all.find_by_name(name) || 
+  end 
+  
   # def self.destroy_all
   #   self.all.clear
   # end 
