@@ -4,6 +4,7 @@ require 'pry'
 class Artist 
   
   attr_accessor :name, :songs
+  attr_reader :genres
   
   extend Memorable::ClassMethods
   include Memorable::InstanceMethods
@@ -13,6 +14,7 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
+    @genres = []
   end 
   
   def self.all
@@ -20,7 +22,7 @@ class Artist
   end 
   
   def add_song(song)
-    if song.artist == "unknown"
+    if song.artist == nil 
       song.artist = self
     end
     
@@ -28,5 +30,14 @@ class Artist
       @songs << song
     end 
   end
+  
+  def genres=(g)
+    binding.pry
+    self.songs.each do |s|
+      if self.genres.find {|g| g == s.genre} == nil 
+        @genres << s.genre
+      end
+    end 
+  end 
   
 end 
