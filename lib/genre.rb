@@ -3,8 +3,8 @@ require_relative '../lib/concerns/memorable.rb'
 class Genre
   attr_accessor :name, :songs
   
-  extend Memorable::ClassMethods
-  include Memorable::InstanceMethods
+  extend Concerns::Memorable::ClassMethods, Concerns::Findable
+  include Concerns::Memorable::InstanceMethods
   
   @@all = []
   
