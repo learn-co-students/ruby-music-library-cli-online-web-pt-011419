@@ -39,19 +39,11 @@ class Song
     end
   end 
   
-
-  
-  # def self.destroy_all
-  #   self.all.clear
-  # end 
-  
-  # def save 
-  #   @@all << self 
-  # end 
-  
-  # def self.create(new_song)
-  #   song = Song.new(new_song)
-  #   song.save
-  #   song
-  # end 
+  def self.new_from_filename (filename)
+    file = filename.split(/ - |[.]/)
+    songname = file[1] 
+    artname = Artist.find_or_create_by_name(file[0])
+    genre = Genre.find_or_create_by_name(file[2])
+    Song.new(songname, artname, genre)
+  end 
 end
